@@ -44,63 +44,97 @@ class MyUser(FastHttpUser):
     #         else:
     #             response.failure(f"Got status code {response.status_code}")
 
+    # @task
+    # def test_query_device(self):
+    #     global i
+    #     device_data = {
+    #         "name": "device" + str(i),
+    #         "type": "TestType",
+    #         "organization": "TestOrganization"
+    #     }
+    #     i = i + 1
+    #     with self.client.post("/api/deviceVerificationCheck/", json=device_data, catch_response=True) as response:
+    #         if response.status_code == 200:
+    #             response.success()
+    #         else:
+    #             response.failure(f"Got status code {response.status_code}")
+    #
+    # @task
+    # def test_add_model(self):
+    #     global i
+    #     device_data = {
+    #         "name": "model" + str(i),
+    #         "type": "TestType",
+    #         "frequency": "TestFrequency",
+    #         "kind": "TestKind",
+    #         "protocol": "TestProtocol",
+    #         "format": "TestFormat",
+    #         "producer": "TestProducer",
+    #         "subnature": "TestSubnature",
+    #         "static_attributes": "{\"attr1\": \"Test Attr 1\", \"attr2\": \"Test Attr 2\"}",
+    #         "service": "TestService",
+    #         "servicePath": "TestServicePath",
+    #         "strDev": "TestStrDev",
+    #         "organization": "TestOrganization"
+    #     }
+    #     i = i + 1
+    #     with open('device_insertion_result/insertion_model.csv', mode='a',
+    #               newline='') as file:
+    #         writer = csv.writer(file)
+    #         writer.writerow([device_data['name'], 'model', device_data['type'], device_data['organization']])
+    #
+    #     with self.client.post("/api/addmodel/", json=device_data, catch_response=True) as response:
+    #         if response.status_code == 200:
+    #             response.success()
+    #         else:
+    #             response.failure(f"Got status code {response.status_code}")
+    #
+    # @task
+    # def test_query_model(self):
+    #
+    #     global i
+    #     device_data = {
+    #         "name": "model" + str(i),
+    #         "type": "TestType",
+    #         "organization": "TestOrganization"
+    #     }
+    #     i = i + 1
+    #     with self.client.post("/api/modelVerificationCheck/", json=device_data, catch_response=True) as response:
+    #         if response.status_code == 200:
+    #             response.success()
+    #         else:
+    #             response.failure(f"Got status code {response.status_code}")
+
     @task
-    def test_query_device(self):
+    # def test_data_insertion(self):
+    #     global i
+    #     data = {
+    #         "devName": "dati"+str(i),
+    #         "devType": "ServiceURI",
+    #         "strDev": '{"humidity":{"value":"40"},"temp":{"value":"20"}}',
+    #         "organization": "TestOrganization"
+    #     }
+    #     i=i+1
+    #     with self.client.post("/api/adddata/", json=data, catch_response=True) as response:
+    #         if response.status_code == 200:
+    #             response.success()
+    #         else:
+    #
+    #             response.failure(f"Got status code {response.status_code}")
+
+    @task
+    def test_data_query(self):
+        #TODO NON FA
         global i
-        device_data = {
-            "name": "device" + str(i),
-            "type": "TestType",
+        data = {
+            "name": "dati" + str(i),
+            "bindings": '{"humidity":{"value":"40"},"temp":{"value":"20"},"dateObserved":{"value":"1970-01-01T00:00:00.000Z"}}',
             "organization": "TestOrganization"
         }
         i = i + 1
-        with self.client.post("/api/deviceVerificationCheck/", json=device_data, catch_response=True) as response:
+        with self.client.post("/api/dataCertificationCheck/", json=data, catch_response=True) as response:
             if response.status_code == 200:
                 response.success()
             else:
-                response.failure(f"Got status code {response.status_code}")
 
-    @task
-    def test_add_model(self):
-        global i
-        device_data = {
-            "name": "model" + str(i),
-            "type": "TestType",
-            "frequency": "TestFrequency",
-            "kind": "TestKind",
-            "protocol": "TestProtocol",
-            "format": "TestFormat",
-            "producer": "TestProducer",
-            "subnature": "TestSubnature",
-            "static_attributes": "{\"attr1\": \"Test Attr 1\", \"attr2\": \"Test Attr 2\"}",
-            "service": "TestService",
-            "servicePath": "TestServicePath",
-            "strDev": "TestStrDev",
-            "organization": "TestOrganization"
-        }
-        i = i + 1
-        with open('device_insertion_result/insertion_model.csv', mode='a',
-                  newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([device_data['name'], 'model', device_data['type'], device_data['organization']])
-
-        with self.client.post("/api/addmodel/", json=device_data, catch_response=True) as response:
-            if response.status_code == 200:
-                response.success()
-            else:
-                response.failure(f"Got status code {response.status_code}")
-
-    @task
-    def test_query_model(self):
-
-        global i
-        device_data = {
-            "name": "model" + str(i),
-            "type": "TestType",
-            "organization": "TestOrganization"
-        }
-        i = i + 1
-        with self.client.post("/api/modelVerificationCheck/", json=device_data, catch_response=True) as response:
-            if response.status_code == 200:
-                response.success()
-            else:
                 response.failure(f"Got status code {response.status_code}")
